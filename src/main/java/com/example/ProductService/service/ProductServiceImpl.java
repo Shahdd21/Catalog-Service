@@ -12,6 +12,7 @@ import com.example.ProductService.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,8 +96,23 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("no product with id " + id));
 
-        return new ProductDTO(product.getName(), product.getDescription(),
+        return new ProductDTO(product.getId(), product.getName(), product.getDescription(),
                 product.getImageCover(), product.getPrice());
+    }
+
+    @Override
+    public List<ProductDTO> getAllProductsForStore() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOS = new ArrayList<>();
+
+        for(Product product : products){
+            productDTOS.add(new ProductDTO(
+                    product.getId(), product.getName(), product.getDescription(),
+                    product.getImageCover(), product.getPrice()
+            ));
+        }
+
+        return productDTOS;
     }
 
     @Override

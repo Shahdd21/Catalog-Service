@@ -31,6 +31,11 @@ public class ProductController {
         return productService.getProductDTOForStore(id);
     }
 
+    @GetMapping("/stores")
+    public List<ProductDTO> getAllProductsForStore(){
+        return productService.getAllProductsForStore();
+    }
+
     @GetMapping("id/{id}")
     public CatalogResponse<Product> getProductById(@PathVariable Long id) {
         return productService.getProductById(id);

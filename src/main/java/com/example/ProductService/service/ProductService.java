@@ -17,5 +17,6 @@ public interface ProductService {
     CatalogResponse<String> deleteProduct(Long id);
 
     ProductDTO getProductDTOForStore(Long id);
+    List<ProductDTO> getAllProductsForStore();
     Product saveProduct(Product product);
 }
